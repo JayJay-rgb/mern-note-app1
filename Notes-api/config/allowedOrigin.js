@@ -1,8 +1,7 @@
-const allowedOrigin= [
-    "www.google.com",
+const allowedOrigin = [
+    "http://localhost:5173",
     "http://localhost:5000",
-    "mongodb://localhost:27017",
-    "http://localhost:5173"
+    "https://mern-note-app1-4.onrender.com"
 ]
 
 export default allowedOrigin
