@@ -23,9 +23,9 @@ const loginController=async (req,res)=>{
             process.env.REFRESH_TOKEN_SECRET,
             {expiresIn:"7d"}
         )
-        res.cookie("jwt",refreshToken,{httpOnly:true,secure:true,maxAge:7*24*60*60*1000})//remove secure
+        res.cookie("jwt",refreshToken,{httpOnly:true,maxAge:7*24*60*60*1000})//remove secure
         res.status(200).json({accessToken});
-        res.json({foundUser})
+        
 
         
     }
