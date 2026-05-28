@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 const  noteSchema = new mongoose.Schema({
     user:{
-        type:ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref:"userDB",
         required:true
     },
