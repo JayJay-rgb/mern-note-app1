@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import Home from "./Home";
+
 
 const Login = ({setUser}) => {
     const [email, setEmail] = useState("");
@@ -13,11 +13,14 @@ const Login = ({setUser}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const { data } = await axios.post("/api/login", { email, password });
-            localStorage.setItem("accessToken", data.accessToken);
-            navigate("/");
-            setUser(data);
+        try{
+        const { data } = await axios.post("/api/login", { email, password });
+localStorage.setItem("accessToken", data.accessToken);
+const { data: userData } = await axios.get("/api/me", {
+    headers: { Authorization: `Bearer ${data.accessToken}` }
+});
+setUser(userData);
+navigate("/");
         } catch(err) {
             console.log(err);
             setError(err.response?.data?.msg || "Server Error");

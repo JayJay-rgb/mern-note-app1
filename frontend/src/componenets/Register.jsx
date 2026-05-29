@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import Home from "./Home";
+
 
 const Register= ({setUser}) => {
     const [userName,setUserName]= useState("");
@@ -13,16 +13,23 @@ const Register= ({setUser}) => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const { data } = await axios.post("/api/register", { username: userName, email, password });
-            setUser(data);
-            navigate("/login");
-        } catch(err) {
-            console.log(err);
-            setError(err.response?.data?.msg || "Server Error");
-        }
+    e.preventDefault();
+    try {
+        await axios.post("/api/register", { username: userName, email, password });
+        
+        // auto login after register
+        const { data } = await axios.post("/api/login", { email, password });
+        localStorage.setItem("accessToken", data.accessToken);
+        const { data: userData } = await axios.get("/api/me", {
+            headers: { Authorization: `Bearer ${data.accessToken}` }
+        });
+        setUser(userData);
+        navigate("/");
+    } catch(err) {
+        console.log(err);
+        setError(err.response?.data?.msg || "Server Error");
     }
+}
     return(
         <div className="container mx-auto max-w-md mt-10 p-6 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-semibold mb-6 text-center">Register</h2>

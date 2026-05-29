@@ -18,13 +18,13 @@ const loginController=async (req,res)=>{
             process.env.ACCESS_TOKEN_SECRET,
             {expiresIn:"1d"}
         )
-        const refreshToken = jwt.sign(
-            {id: foundUser._id},
-            process.env.REFRESH_TOKEN_SECRET,
-            {expiresIn:"7d"}
-        )
-        res.cookie("jwt",refreshToken,{httpOnly:true,maxAge:7*24*60*60*1000})//remove secure
-        res.status(200).json({accessToken});
+        // const refreshToken = jwt.sign(
+        //     {id: foundUser._id},
+        //     process.env.REFRESH_TOKEN_SECRET,
+        //     {expiresIn:"7d"}
+        // )
+        // res.cookie("jwt",refreshToken,{httpOnly:true,maxAge:7*24*60*60*1000})//remove secure
+        res.status(200).json(accessToken);
         
 
         
