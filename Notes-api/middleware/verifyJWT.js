@@ -4,7 +4,7 @@ import "dotenv/config"
 const verifyJWT = (req,res,next)=>{
     const authorizedHeader= req.headers.authorization||req.headers.Authorization;
     if(!authorizedHeader) return res.sendStatus(403);
-    if(!authorizedHeader.startsWith("Bearer")) return res.sendStatus(401);
+    if(!authorizedHeader.startsWith("Bearer ")) return res.sendStatus(401);
 
     const token = authorizedHeader.split(" ")[1];
     if(!token) return res.sendStatus(401);
