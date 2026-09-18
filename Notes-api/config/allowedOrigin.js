@@ -4,4 +4,4 @@ const allowedOrigin = [
     "https://mern-note-app1-4.onrender.com"
 ]
 
-export default allowedOrigin
+export default allowedOrigin;

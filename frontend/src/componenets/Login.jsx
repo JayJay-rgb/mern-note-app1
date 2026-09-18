@@ -15,7 +15,7 @@ const Login = ({setUser}) => {
         e.preventDefault();
         try{
         const { data } = await axios.post("/api/login", { email, password });
-localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("accessToken", data.accessToken);
 const { data: userData } = await axios.get("/api/me", {
     headers: { Authorization: `Bearer ${data.accessToken}` }
 });
